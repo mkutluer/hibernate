@@ -13,13 +13,12 @@ public class HibernateUtil {
         try {
             Configuration configuration = new Configuration();
             configuration.configure();
-            System.out.println("Hibernate annotation configuration loaded");
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
             return configuration.buildSessionFactory(serviceRegistry);
         } catch (Exception e) {
-            System.err.println("Initial Session factroy create failed. Error: " + e.getMessage());
-            throw new ExceptionInInitializerError(e);
+            e.printStackTrace();
+            throw new RuntimeException("SessionFactory initialization failed.");
         }
     }
 
