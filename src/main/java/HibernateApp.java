@@ -4,7 +4,7 @@ import util.HibernateUtil;
 
 import java.util.Date;
 
-public class XmlMappingApp {
+public class HibernateApp {
 
     public static void main(String[] args) {
         Employee employee = new Employee();
@@ -12,12 +12,12 @@ public class XmlMappingApp {
         employee.setRole("USG");
         employee.setInsertTime(new Date());
 
-        Session session = HibernateUtil.getSessionFactoryXmlMapping().getCurrentSession();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         session.save(employee);
         session.getTransaction().commit();
         System.out.println("Employee Id: " + employee.getId());;
-        HibernateUtil.getSessionFactoryXmlMapping().close();
+        HibernateUtil.getSessionFactory().close();
 
     }
 
