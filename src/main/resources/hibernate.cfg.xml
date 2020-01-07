@@ -13,8 +13,7 @@
         <property name="show_sql">true</property>
         <property name="hbm2ddl.auto">update</property>
 
-        <mapping class="model.Employee"/>
         <mapping class="model.Customer"/>
-        <mapping class="model.Transaction"/>
+        <mapping class="model.Address"/>
     </session-factory>
 </hibernate-configuration>

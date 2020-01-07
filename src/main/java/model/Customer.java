@@ -1,22 +1,15 @@
 package model;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Index;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "customer", indexes = {@Index(name = "transaction_id", columnList = "transaction_id")})
+@Table(name = "customer")
 public class Customer {
 
     @Id
@@ -30,12 +23,8 @@ public class Customer {
     @Column(name = "email", length = 80)
     private String email;
 
-    @Column(name = "address", length = 255)
-    private String address;
-
-    @OneToOne
-    @JoinColumn(name = "transaction_id", referencedColumnName = "id")
-    Transaction transaction;
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+    private Address address;
 
     public long getId() {
         return id;
@@ -61,19 +50,17 @@ public class Customer {
         this.email = email;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
-    public Transaction getTransaction() {
-        return transaction;
-    }
-
-    public void setTransaction(Transaction transaction) {
-        this.transaction = transaction;
+    @Override
+    public String toString() {
+        return "Customer [id=" + id + ", name=" + name + ", email=" + email
+                + ", address=" + address + "]";
     }
 }

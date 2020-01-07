@@ -1,6 +1,5 @@
+import model.Address;
 import model.Customer;
-import model.Employee;
-import model.Transaction;
 import org.hibernate.Session;
 import util.HibernateUtil;
 
@@ -9,31 +8,28 @@ import java.util.Date;
 public class Application {
 
     public static void main(String[] args) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = null;
         try {
-            Employee employee = new Employee();
-            employee.setName("Murat");
-            employee.setRole("USG");
-            employee.setInsertTime(new Date());
+            session = HibernateUtil.getSessionFactory().openSession();
 
             Customer customer = new Customer();
-            customer.setName("murat");
+            customer.setName("Murat Kutluer");
             customer.setEmail("muratkutluer@yahoo.com");
 
-            Transaction transaction = new Transaction();
-            transaction.setTotal(250);
-            transaction.setDate(new Date());
-            customer.setTransaction(transaction);
+            Address address = new Address();
+            address.setStreet("Eski Londro Asfaltı");
+            address.setCity("İstanbul");
+            address.setCountry("Turkey");
+
+            customer.setAddress(address);
+            address.setCustomer(customer);
 
             session.beginTransaction();
-            session.save(employee);
-            session.save(transaction);
             session.save(customer);
+            session.save(address);
             session.getTransaction().commit();
-            System.out.println("Employee Id: " + employee.getId());
-            System.out.println("Transaction Id: " + transaction.getId());
+            System.out.println("Address Id: " + address.getId());
             System.out.println("Customer Id: " + customer.getId());
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
