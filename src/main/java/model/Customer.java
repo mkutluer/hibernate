@@ -1,6 +1,5 @@
 package model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +22,7 @@ public class Customer {
     @Column(name = "email", length = 80)
     private String email;
 
-    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "customer")
     private Address address;
 
     public long getId() {

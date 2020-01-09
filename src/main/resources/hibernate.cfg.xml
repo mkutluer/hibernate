@@ -15,5 +15,8 @@
 
         <mapping class="model.Customer"/>
         <mapping class="model.Address"/>
+        <mapping class="model.Product"/>
+        <mapping class="model.Basket"/>
+        <mapping class="model.Item"/>
     </session-factory>
 </hibernate-configuration>
