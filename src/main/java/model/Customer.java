@@ -4,8 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -24,6 +27,18 @@ public class Customer {
 
     @OneToOne(mappedBy = "customer")
     private Address address;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Basket> baskets = new ArrayList<>();
+
+    public Customer() {
+
+    }
+
+    public Customer(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 
     public long getId() {
         return id;

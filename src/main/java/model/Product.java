@@ -25,6 +25,16 @@ public class Product {
     @Column(name = "price")
     private BigDecimal price;
 
+    public Product() {
+
+    }
+
+    public Product(String name, int stock, BigDecimal price) {
+        this.name = name;
+        this.stock = stock;
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }

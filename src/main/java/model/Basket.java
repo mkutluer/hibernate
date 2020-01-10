@@ -1,15 +1,18 @@
 package model;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,11 +24,15 @@ public class Basket {
     @GeneratedValue
     private long id;
 
-    @Basic
-    private Date created;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    private Customer customer;
 
     @Column
-    private Date updated;
+    private LocalDateTime created;
+
+    @Column
+    private LocalDateTime updated;
 
     @Column
     private String status;
@@ -36,6 +43,17 @@ public class Basket {
     @OneToMany(mappedBy = "basket")
     private List<Item> items = new ArrayList<>();
 
+    public Basket() {
+
+    }
+
+    public Basket(Customer customer, LocalDateTime created, LocalDateTime updated, String status, BigDecimal total) {
+        this.customer = customer;
+        this.created = created;
+        this.updated = updated;
+        this.status = status;
+        this.total = total;
+    }
 
     public long getId() {
         return id;
@@ -45,19 +63,27 @@ public class Basket {
         this.id = id;
     }
 
-    public Date getCreated() {
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 
-    public Date getUpdated() {
+    public LocalDateTime getUpdated() {
         return updated;
     }
 
-    public void setUpdated(Date updated) {
+    public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
     }
 
@@ -77,11 +103,11 @@ public class Basket {
         this.total = total;
     }
 
-//    public List<Item> getItems() {
-//        return items;
-//    }
-//
-//    public void setItems(List<Item> items) {
-//        this.items = items;
-//    }
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
 }

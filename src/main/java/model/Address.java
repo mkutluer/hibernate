@@ -31,6 +31,17 @@ public class Address {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
+    public Address() {
+
+    }
+
+    public Address(String street, String city, String country, Customer customer) {
+        this.street = street;
+        this.city = city;
+        this.country = country;
+        this.customer = customer;
+    }
+
     public long getId() {
         return id;
     }

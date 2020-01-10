@@ -33,6 +33,17 @@ public class Item {
     @Column(name = "price")
     private BigDecimal price;
 
+    public Item() {
+
+    }
+
+    public Item(Basket basket, Product product, int quantity, BigDecimal price) {
+        this.basket = basket;
+        this.product = product;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
     public long getId() {
         return id;
     }
