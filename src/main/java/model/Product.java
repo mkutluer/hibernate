@@ -1,13 +1,20 @@
 package model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "product")
@@ -29,6 +36,11 @@ public class Product {
 
     @Column(name = "created", nullable = false)
     private LocalDateTime created;
+
+    @ManyToMany(targetEntity = Category.class, cascade = CascadeType.ALL)
+    @JoinTable(name = "category_product", joinColumns = {@JoinColumn(name = "product_id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id")})
+    private List<Category> categories = new ArrayList<>();
 
     public Product() {
 
@@ -79,6 +91,14 @@ public class Product {
 
     public void setCreated(LocalDateTime created) {
         this.created = created;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
     @Override
