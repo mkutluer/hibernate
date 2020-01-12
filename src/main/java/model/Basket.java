@@ -5,6 +5,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,24 +21,24 @@ import java.util.List;
 public class Basket {
 
     @Id
-    @Column(name = "id")
-    @GeneratedValue
+    @Column(name = "id", columnDefinition = "BIGINT(20) UNSIGNED")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     private Customer customer;
 
-    @Column
+    @Column(nullable = false)
     private LocalDateTime created;
 
-    @Column
+    @Column(nullable = false)
     private LocalDateTime updated;
 
-    @Column
+    @Column(nullable = false)
     private String status;
 
-    @Column
+    @Column(nullable = false)
     private BigDecimal total;
 
     @OneToMany(mappedBy = "basket")
@@ -109,5 +110,18 @@ public class Basket {
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return "Basket{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", status='" + status + '\'' +
+                ", total=" + total +
+                ", items=" + items +
+                '}';
     }
 }

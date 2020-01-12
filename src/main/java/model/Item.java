@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,22 +16,22 @@ import java.math.BigDecimal;
 public class Item {
 
     @Id
-    @GeneratedValue
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", columnDefinition = "BIGINT(20) UNSIGNED")
     private long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "basket_id", referencedColumnName = "id")
+    @JoinColumn(name = "basket_id", referencedColumnName = "id", nullable = false)
     private Basket basket;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)
     private Product product;
 
-    @Column(name = "quantity")
+    @Column(name = "quantity", nullable = false)
     private int quantity;
 
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
 
     public Item() {
@@ -82,5 +83,16 @@ public class Item {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", basket=" + basket +
+                ", product=" + product +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                '}';
     }
 }

@@ -3,43 +3,49 @@ package model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "product")
 public class Product {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", columnDefinition = "BIGINT(20) UNSIGNED")
+    private long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "stock")
+    @Column(name = "stock", nullable = false)
     private int stock;
 
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
+
+    @Column(name = "created", nullable = false)
+    private LocalDateTime created;
 
     public Product() {
 
     }
 
-    public Product(String name, int stock, BigDecimal price) {
+    public Product(String name, int stock, BigDecimal price, LocalDateTime created) {
         this.name = name;
         this.stock = stock;
         this.price = price;
+        this.created = created;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -65,5 +71,24 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", stock=" + stock +
+                ", price=" + price +
+                ", created=" + created +
+                '}';
     }
 }

@@ -3,6 +3,7 @@ package model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -15,14 +16,14 @@ import java.util.List;
 public class Customer {
 
     @Id
-    @Column(name = "id")
-    @GeneratedValue
+    @Column(name = "id", columnDefinition = "BIGINT(20) UNSIGNED")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name", length = 40)
+    @Column(name = "name", length = 40, nullable = false)
     private String name;
 
-    @Column(name = "email", length = 80)
+    @Column(name = "email", length = 80, nullable = false)
     private String email;
 
     @OneToOne(mappedBy = "customer")

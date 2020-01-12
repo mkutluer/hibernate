@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -14,21 +15,21 @@ import javax.persistence.Table;
 public class Address {
 
     @Id
-    @Column(name="id")
-    @GeneratedValue
+    @Column(name="id", columnDefinition = "BIGINT(20) UNSIGNED")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "street")
+    @Column(name = "street", nullable = false)
     private String street;
 
-    @Column(name = "city")
+    @Column(name = "city", nullable = false)
     private String city;
 
     @Column(name = "country")
     private String country;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     private Customer customer;
 
     public Address() {
