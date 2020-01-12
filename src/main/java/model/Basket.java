@@ -38,7 +38,7 @@ public class Basket {
     private LocalDateTime updated;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "ENUM ('PENDING', 'APPROVED', 'SHIPPED', 'DELIVERED', 'CANCELED', 'COMPLETED')")
     private BasketStatus status;
 
     @Column(nullable = false)
