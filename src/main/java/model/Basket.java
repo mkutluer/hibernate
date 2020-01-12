@@ -4,6 +4,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,8 +37,9 @@ public class Basket {
     @Column(nullable = false)
     private LocalDateTime updated;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String status;
+    private BasketStatus status;
 
     @Column(nullable = false)
     private BigDecimal total;
@@ -48,7 +51,7 @@ public class Basket {
 
     }
 
-    public Basket(Customer customer, LocalDateTime created, LocalDateTime updated, String status, BigDecimal total) {
+    public Basket(Customer customer, LocalDateTime created, LocalDateTime updated, BasketStatus status, BigDecimal total) {
         this.customer = customer;
         this.created = created;
         this.updated = updated;
@@ -88,11 +91,11 @@ public class Basket {
         this.updated = updated;
     }
 
-    public String getStatus() {
+    public BasketStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(BasketStatus status) {
         this.status = status;
     }
 

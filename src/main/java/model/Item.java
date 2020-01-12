@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "item")
+@Table(name = "basket_item")
 public class Item {
 
     @Id
@@ -89,7 +89,6 @@ public class Item {
     public String toString() {
         return "Item{" +
                 "id=" + id +
-                ", basket=" + basket +
                 ", product=" + product +
                 ", quantity=" + quantity +
                 ", price=" + price +
