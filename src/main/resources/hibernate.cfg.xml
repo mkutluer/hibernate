@@ -13,11 +13,11 @@
         <property name="show_sql">true</property>
         <property name="hbm2ddl.auto">update</property>
 
-        <mapping class="model.Customer"/>
-        <mapping class="model.Address"/>
-        <mapping class="model.Category"/>
-        <mapping class="model.Product"/>
-        <mapping class="model.Basket"/>
-        <mapping class="model.Item"/>
+        <mapping class="data.Customer"/>
+        <mapping class="data.Address"/>
+        <mapping class="data.Category"/>
+        <mapping class="data.Product"/>
+        <mapping class="data.Basket"/>
+        <mapping class="data.Item"/>
     </session-factory>
 </hibernate-configuration>

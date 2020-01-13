@@ -1,4 +1,4 @@
-package model;
+package data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

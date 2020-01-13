@@ -1,10 +1,10 @@
-import model.Address;
-import model.Basket;
-import model.BasketStatus;
-import model.Category;
-import model.Customer;
-import model.Item;
-import model.Product;
+import data.Address;
+import data.Basket;
+import data.BasketStatus;
+import data.Category;
+import data.Customer;
+import data.Item;
+import data.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class AppTest {
+public class CreateTest {
 
     private static SessionFactory sessionFactory;
 
